@@ -22,6 +22,10 @@ contract OddEven {
     Player[2] private players;
     uint count = 0;
 
+    constructor () public {
+        console.log( "OddEven@constructor owner addr[%s]", msg.sender );
+    }
+
     function play(uint number) public payable {
             require(msg.value == 10 ether, 'msg.value must be 10 eth');
 
