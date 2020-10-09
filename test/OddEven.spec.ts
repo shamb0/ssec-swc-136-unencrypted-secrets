@@ -12,9 +12,9 @@ import { getLogger } from './test-utils'
 
 import { GAS_LIMIT } from './test-helpers'
 
-const log = getLogger('Blk-Time-Manipulation-Test')
+const log = getLogger('Unencrypted-Secrets-Test')
 
-describe('OddEven Unint Pointer Test', () => {
+describe('unencrypted-secrets Test', () => {
   let wallet: Signer
   let usr1: Signer
   let usr2: Signer
