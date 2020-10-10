@@ -22,8 +22,16 @@ contract OddEven {
     Player[2] private players;
     uint count = 0;
 
+    mapping( address => uint ) private countmap;
+
     constructor () public {
         console.log( "OddEven@constructor owner addr[%s]", msg.sender );
+    }
+
+    receive () external payable {
+        console.log( "OddEven@receive fromaddr[%s] bal[%s]",
+                                msg.sender,
+                                address(this).balance );
     }
 
     function play(uint number) public payable {
@@ -50,6 +58,11 @@ contract OddEven {
             require(success, 'transfer failed');
             delete players;
             count = 0;
+    }
+
+    function getArrayIndex() public returns( uint ) {
+        countmap[ msg.sender ] = count;
+        return count;
     }
 
 }

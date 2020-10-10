@@ -65,7 +65,29 @@ describe('unencrypted-secrets Test', () => {
 
   })
 
-  it("tst-item-001-usr1-play", async () => {
+  it("tst-item-001-print-index", async () => {
+
+    try {
+
+      log.debug(`S2.1-Ent :: ${ethers.utils.formatUnits( await wallet.getBalance(), "ether")}`)
+
+      // let indx:number = await oddeveninst.getArrayIndex()
+
+      const receipt = await oddeveninst.getArrayIndex()
+
+      await oddeveninst.provider.waitForTransaction( receipt.hash )
+
+      log.debug(`Int Index :: ${receipt.value}`)
+
+      log.debug(`S2.1-Ext :: ${ethers.utils.formatUnits( await wallet.getBalance(), "ether")}`)
+
+    }
+    catch( err ){
+      log.error(`Exception Err ${err}`)
+    }
+  })
+
+  it("tst-item-002-usr1-play", async () => {
 
     try {
 
@@ -120,15 +142,21 @@ describe('unencrypted-secrets Test', () => {
 
         log.debug(`S2.2 nounce :: ${trancnt}`)
 
+        // await usr2.provider.call({
+        // to: oddeveninst.address,
+        // from: await usr2.getAddress(),
+        // nonce: trancnt,
+        // gasLimit: GAS_LIMIT,
+        // gasPrice: nwkgasprice,
+        // data: add0x(playCalldata),
+        // value: transamount
+        // })
+
         await usr2.provider.call({
-        to: oddeveninst.address,
-        from: await usr2.getAddress(),
-        nonce: trancnt,
-        gasLimit: GAS_LIMIT,
-        gasPrice: nwkgasprice,
-        data: add0x(playCalldata),
-        value: transamount
-        })
+          to: oddeveninst.address,
+          from: await usr2.getAddress(),
+          value: transamount
+          })
 
         bal = await oddeveninst.provider.getBalance( oddeveninst.address )
 
